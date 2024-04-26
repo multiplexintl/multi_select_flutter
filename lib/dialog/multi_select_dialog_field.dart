@@ -20,6 +20,9 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Specify the button icon.
   final Icon? buttonIcon;
 
+  /// prefix icon
+  final Widget? prefix;
+
   /// The text at the top of the dialog.
   final Widget? title;
 
@@ -113,6 +116,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.buttonText,
     this.buttonIcon,
     this.listType,
+    this.prefix,
     this.decoration,
     this.onSelectionChanged,
     this.chipDisplay,
@@ -153,6 +157,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 title: title,
                 items: items,
                 buttonText: buttonText,
+                prefix: prefix,
                 buttonIcon: buttonIcon,
                 chipDisplay: chipDisplay,
                 decoration: decoration,
@@ -192,6 +197,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final Text? buttonText;
   final Icon? buttonIcon;
   final Widget? title;
+  final Widget? prefix;
   final List<MultiSelectItem<V>> items;
   final void Function(List<V>)? onSelectionChanged;
   final MultiSelectChipDisplay<V>? chipDisplay;
@@ -224,6 +230,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     this.title,
     this.buttonText,
     this.buttonIcon,
+    this.prefix,
     this.listType,
     this.decoration,
     this.onSelectionChanged,
@@ -259,6 +266,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         title = field.title,
         buttonText = field.buttonText,
         buttonIcon = field.buttonIcon,
+        prefix = field.prefix,
         listType = field.listType,
         decoration = field.decoration,
         onSelectionChanged = field.onSelectionChanged,
@@ -453,7 +461,9 @@ class __MultiSelectDialogFieldViewState<V>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
+                widget.prefix ?? const Icon(Icons.group),
                 widget.buttonText ?? const Text("Select"),
+                const Spacer(),
                 widget.buttonIcon ?? const Icon(Icons.arrow_downward),
               ],
             ),
